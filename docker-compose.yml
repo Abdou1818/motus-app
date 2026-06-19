@@ -1,0 +1,171 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: motus-postgres
+    environment:
+      POSTGRES_USER: motus
+      POSTGRES_PASSWORD: motus
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U motus"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - motus-network
+
+  word-service:
+    build: ./word-service
+    container_name: motus-word-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_NAME: db_words
+      DB_USER: motus
+      DB_PASS: motus
+    networks:
+      - motus-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8083/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  player-service:
+    build: ./player-service
+    container_name: motus-player-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_NAME: db_players
+      DB_USER: motus
+      DB_PASS: motus
+      SCORE_SERVICE_URL: http://score-service:8084
+    networks:
+      - motus-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8081/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  score-service:
+    build: ./score-service
+    container_name: motus-score-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_NAME: db_scores
+      DB_USER: motus
+      DB_PASS: motus
+    networks:
+      - motus-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8084/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  game-service:
+    build: ./game-service
+    container_name: motus-game-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      word-service:
+        condition: service_healthy
+      score-service:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_NAME: db_games
+      DB_USER: motus
+      DB_PASS: motus
+      WORD_SERVICE_URL: http://word-service:8083
+      SCORE_SERVICE_URL: http://score-service:8084
+    networks:
+      - motus-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8082/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  admin-service:
+    build: ./admin-service
+    container_name: motus-admin-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - player-service
+      - game-service
+      - score-service
+    environment:
+      GAME_SERVICE_URL: http://game-service:8082
+      PLAYER_SERVICE_URL: http://player-service:8081
+      SCORE_SERVICE_URL: http://score-service:8084
+      ADMIN_KEY: admin-secret
+    networks:
+      - motus-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: motus-api-gateway
+    ports:
+      - "8090:8080"
+    depends_on:
+      - player-service
+      - game-service
+      - word-service
+      - score-service
+      - admin-service
+    environment:
+      PLAYER_SERVICE_URL: http://player-service:8081
+      GAME_SERVICE_URL: http://game-service:8082
+      WORD_SERVICE_URL: http://word-service:8083
+      SCORE_SERVICE_URL: http://score-service:8084
+      ADMIN_SERVICE_URL: http://admin-service:8085
+    networks:
+      - motus-network
+
+  frontend:
+    image: nginx:alpine
+    container_name: motus-frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    networks:
+      - motus-network
+
+volumes:
+  postgres-data:
+
+networks:
+  motus-network:
+    driver: bridge

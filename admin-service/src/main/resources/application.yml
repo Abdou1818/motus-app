@@ -1,0 +1,30 @@
+server:
+  port: 8085
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: admin-service
+
+game:
+  service:
+    url: ${GAME_SERVICE_URL:http://localhost:8082}
+
+player:
+  service:
+    url: ${PLAYER_SERVICE_URL:http://localhost:8081}
+
+score:
+  service:
+    url: ${SCORE_SERVICE_URL:http://localhost:8084}
+
+admin:
+  key: ${ADMIN_KEY:admin-secret}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

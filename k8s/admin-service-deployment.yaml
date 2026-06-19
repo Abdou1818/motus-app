@@ -1,0 +1,81 @@
+---
+# ── Secret: admin key ────────────────────────────────────────────
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-secret
+  namespace: default
+type: Opaque
+stringData:
+  ADMIN_KEY: admin-secret
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-service
+  namespace: default
+  labels:
+    app: admin-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-service
+  template:
+    metadata:
+      labels:
+        app: admin-service
+    spec:
+      containers:
+        - name: admin-service
+          image: motus/admin-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8085
+          env:
+            - name: GAME_SERVICE_URL
+              value: http://game-service:8082
+            - name: PLAYER_SERVICE_URL
+              value: http://player-service:8081
+            - name: SCORE_SERVICE_URL
+              value: http://score-service:8084
+            - name: ADMIN_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: admin-secret
+                  key: ADMIN_KEY
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8085
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8085
+            initialDelaySeconds: 40
+            periodSeconds: 15
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "300m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-service
+  namespace: default
+spec:
+  selector:
+    app: admin-service
+  ports:
+    - port: 8085
+      targetPort: 8085
+  type: ClusterIP
