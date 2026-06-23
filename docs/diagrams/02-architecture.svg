@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 720" font-family="Helvetica, Arial, sans-serif">
+  <rect width="920" height="720" fill="#ffffff"/>
+  <text x="460" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#1b1f33">Architecture microservices — Motus</text>
+  <text x="460" y="64" text-anchor="middle" font-size="14" fill="#5d6480">Déploiement Docker Compose · réseau motus-network</text>
+
+  <!-- Docker network boundary -->
+  <rect x="30" y="90" width="860" height="610" rx="16" fill="none" stroke="#c7cdec" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="48" y="114" font-size="13" font-weight="600" fill="#8b5cf6">Réseau Docker : motus-network</text>
+
+  <!-- Browser / Frontend -->
+  <rect x="350" y="120" width="220" height="60" rx="12" fill="#eef1fb" stroke="#6366f1" stroke-width="2"/>
+  <text x="460" y="146" text-anchor="middle" font-size="15" font-weight="700" fill="#1b1f33">Navigateur — Frontend</text>
+  <text x="460" y="166" text-anchor="middle" font-size="12" fill="#5d6480">SPA HTML/CSS/JS · Nginx :3000</text>
+
+  <!-- arrow front -> gateway -->
+  <line x1="460" y1="180" x2="460" y2="210" stroke="#6366f1" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- API Gateway -->
+  <rect x="300" y="212" width="320" height="58" rx="12" fill="#6366f1" stroke="#4f46e5" stroke-width="2"/>
+  <text x="460" y="238" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">API Gateway · Spring Cloud Gateway</text>
+  <text x="460" y="258" text-anchor="middle" font-size="12" fill="#dfe3ff">:8090 → 8080 · routage + CORS</text>
+
+  <!-- Services row -->
+  <g font-size="13" font-weight="700" fill="#1b1f33">
+    <!-- player -->
+    <rect x="40" y="330" width="150" height="64" rx="11" fill="#ffffff" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="115" y="356" text-anchor="middle">player-service</text>
+    <text x="115" y="376" text-anchor="middle" font-size="11" font-weight="400" fill="#5d6480">:8081 · joueurs</text>
+    <!-- game -->
+    <rect x="210" y="330" width="150" height="64" rx="11" fill="#ffffff" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="285" y="356" text-anchor="middle">game-service</text>
+    <text x="285" y="376" text-anchor="middle" font-size="11" font-weight="400" fill="#5d6480">:8082 · parties</text>
+    <!-- word -->
+    <rect x="380" y="330" width="150" height="64" rx="11" fill="#ffffff" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="455" y="356" text-anchor="middle">word-service</text>
+    <text x="455" y="376" text-anchor="middle" font-size="11" font-weight="400" fill="#5d6480">:8083 · dictionnaire</text>
+    <!-- score -->
+    <rect x="550" y="330" width="150" height="64" rx="11" fill="#ffffff" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="625" y="356" text-anchor="middle">score-service</text>
+    <text x="625" y="376" text-anchor="middle" font-size="11" font-weight="400" fill="#5d6480">:8084 · classement</text>
+    <!-- admin -->
+    <rect x="720" y="330" width="150" height="64" rx="11" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+    <text x="795" y="356" text-anchor="middle">admin-service</text>
+    <text x="795" y="376" text-anchor="middle" font-size="11" font-weight="400" fill="#5d6480">:8085 · sans BDD</text>
+  </g>
+
+  <!-- gateway -> services -->
+  <g stroke="#a5abd6" stroke-width="2" fill="none" marker-end="url(#arrg)">
+    <path d="M380 270 C300 295, 160 305, 115 330"/>
+    <path d="M430 270 C360 298, 300 305, 285 330"/>
+    <path d="M460 270 L455 330"/>
+    <path d="M495 270 C560 298, 610 305, 625 330"/>
+    <path d="M545 270 C650 295, 760 305, 795 330"/>
+  </g>
+
+  <!-- inter-service calls -->
+  <g stroke="#10b981" stroke-width="2" fill="none" marker-end="url(#arre)" stroke-dasharray="5 4">
+    <!-- game -> word -->
+    <path d="M360 362 L380 362"/>
+    <!-- game -> score -->
+    <path d="M285 394 C285 430, 600 430, 625 394"/>
+    <!-- player -> score -->
+    <path d="M150 394 C150 450, 600 455, 623 394"/>
+  </g>
+  <text x="455" y="446" text-anchor="middle" font-size="11" fill="#059669">game → word (mot) · game/player → score (résultats)</text>
+
+  <!-- admin dashed to services -->
+  <g stroke="#f59e0b" stroke-width="1.8" fill="none" marker-end="url(#arra)" stroke-dasharray="3 3">
+    <path d="M770 394 C700 470, 360 470, 300 394"/>
+  </g>
+  <text x="700" y="488" text-anchor="middle" font-size="11" fill="#b45309">admin → player / game / score (agrégation)</text>
+
+  <!-- services -> db -->
+  <g stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <path d="M115 394 L300 560"/>
+    <path d="M285 394 L360 560"/>
+    <path d="M455 394 L470 560"/>
+    <path d="M625 394 L560 560"/>
+  </g>
+
+  <!-- PostgreSQL -->
+  <rect x="250" y="560" width="420" height="110" rx="14" fill="#f4f6fd" stroke="#6366f1" stroke-width="2"/>
+  <text x="460" y="586" text-anchor="middle" font-size="15" font-weight="700" fill="#1b1f33">PostgreSQL 15 · :5432</text>
+  <g font-size="11.5" fill="#1b1f33" font-weight="600">
+    <rect x="270" y="600" width="90" height="50" rx="8" fill="#ffffff" stroke="#c7cdec"/>
+    <text x="315" y="622" text-anchor="middle">db_players</text>
+    <text x="315" y="639" text-anchor="middle" font-size="10" font-weight="400" fill="#5d6480">players</text>
+    <rect x="372" y="600" width="90" height="50" rx="8" fill="#ffffff" stroke="#c7cdec"/>
+    <text x="417" y="622" text-anchor="middle">db_games</text>
+    <text x="417" y="639" text-anchor="middle" font-size="10" font-weight="400" fill="#5d6480">games · attempts</text>
+    <rect x="474" y="600" width="90" height="50" rx="8" fill="#ffffff" stroke="#c7cdec"/>
+    <text x="519" y="622" text-anchor="middle">db_words</text>
+    <text x="519" y="639" text-anchor="middle" font-size="10" font-weight="400" fill="#5d6480">words</text>
+    <rect x="576" y="600" width="76" height="50" rx="8" fill="#ffffff" stroke="#c7cdec"/>
+    <text x="614" y="622" text-anchor="middle">db_scores</text>
+    <text x="614" y="639" text-anchor="middle" font-size="10" font-weight="400" fill="#5d6480">game_results</text>
+  </g>
+
+  <!-- legend -->
+  <g font-size="11.5" fill="#5d6480">
+    <line x1="48" y1="690" x2="78" y2="690" stroke="#a5abd6" stroke-width="2"/>
+    <text x="84" y="694">routage Gateway</text>
+    <line x1="210" y1="690" x2="240" y2="690" stroke="#10b981" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="246" y="694">appel REST inter-service</text>
+    <line x1="420" y1="690" x2="450" y2="690" stroke="#6366f1" stroke-width="2"/>
+    <text x="456" y="694">accès BDD (JPA)</text>
+    <line x1="600" y1="690" x2="630" y2="690" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="3 3"/>
+    <text x="636" y="694">agrégation admin</text>
+  </g>
+
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#6366f1"/></marker>
+    <marker id="arrg" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#a5abd6"/></marker>
+    <marker id="arre" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#10b981"/></marker>
+    <marker id="arra" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f59e0b"/></marker>
+  </defs>
+</svg>

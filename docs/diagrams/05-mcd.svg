@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 600" font-family="Helvetica, Arial, sans-serif">
+  <rect width="940" height="600" fill="#ffffff"/>
+  <text x="470" y="36" text-anchor="middle" font-size="24" font-weight="700" fill="#1b1f33">Modèle de données — une base par microservice</text>
+  <text x="470" y="58" text-anchor="middle" font-size="13" fill="#5d6480">Pattern « Database per Service » : isolation des schémas, aucune jointure physique inter-bases.</text>
+
+  <!-- db_players -->
+  <rect x="40" y="90" width="200" height="40" rx="9" fill="#8b5cf6"/>
+  <text x="140" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">db_players</text>
+  <g>
+    <rect x="40" y="140" width="200" height="120" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="2"/>
+    <rect x="40" y="140" width="200" height="26" rx="8" fill="#f3f0ff"/>
+    <text x="140" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">players</text>
+    <g font-size="12" fill="#1b1f33">
+      <text x="52" y="182" font-weight="700">PK ·id  BIGSERIAL</text>
+      <text x="52" y="202">username  VARCHAR «UQ»</text>
+      <text x="52" y="222">email  VARCHAR «UQ»</text>
+      <text x="52" y="242" fill="#5d6480">created_at  TIMESTAMP</text>
+    </g>
+  </g>
+
+  <!-- db_games -->
+  <rect x="290" y="90" width="320" height="40" rx="9" fill="#6366f1"/>
+  <text x="450" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">db_games</text>
+  <!-- games -->
+  <g>
+    <rect x="290" y="140" width="200" height="230" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
+    <rect x="290" y="140" width="200" height="26" rx="8" fill="#eef1fb"/>
+    <text x="390" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">games</text>
+    <g font-size="11.5" fill="#1b1f33">
+      <text x="302" y="182" font-weight="700">PK ·id  BIGSERIAL</text>
+      <text x="302" y="201">player_id  BIGINT</text>
+      <text x="302" y="220">player_username  VARCHAR</text>
+      <text x="302" y="239">word_id  BIGINT</text>
+      <text x="302" y="258">secret_word  VARCHAR</text>
+      <text x="302" y="277">word_length  INT</text>
+      <text x="302" y="296">max_attempts  INT</text>
+      <text x="302" y="315">attempts_used  INT</text>
+      <text x="302" y="334">status  VARCHAR</text>
+      <text x="302" y="353" fill="#5d6480">created_at · finished_at</text>
+    </g>
+  </g>
+  <!-- attempts -->
+  <g>
+    <rect x="510" y="140" width="100" height="0"/>
+    <rect x="510" y="200" width="100" height="170" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
+    <rect x="510" y="200" width="100" height="26" rx="8" fill="#eef1fb"/>
+    <text x="560" y="218" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4f46e5">attempts</text>
+    <g font-size="11" fill="#1b1f33">
+      <text x="520" y="242" font-weight="700">PK ·id</text>
+      <text x="520" y="261">game_id «FK»</text>
+      <text x="520" y="280">attempt_</text>
+      <text x="520" y="294">number</text>
+      <text x="520" y="313">proposed_</text>
+      <text x="520" y="327">word</text>
+      <text x="520" y="346">result TEXT</text>
+      <text x="520" y="362" fill="#5d6480">created_at</text>
+    </g>
+  </g>
+  <!-- games 1..* attempts (real FK within db_games) -->
+  <line x1="490" y1="258" x2="510" y2="285" stroke="#6366f1" stroke-width="2"/>
+  <text x="494" y="252" font-size="11" fill="#5d6480">1</text>
+  <text x="500" y="298" font-size="11" fill="#5d6480">∞</text>
+
+  <!-- db_words -->
+  <rect x="660" y="90" width="240" height="40" rx="9" fill="#10b981"/>
+  <text x="780" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">db_words</text>
+  <g>
+    <rect x="660" y="140" width="240" height="120" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="2"/>
+    <rect x="660" y="140" width="240" height="26" rx="8" fill="#e7f9f1"/>
+    <text x="780" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">words</text>
+    <g font-size="12" fill="#1b1f33">
+      <text x="672" y="182" font-weight="700">PK ·id  BIGSERIAL</text>
+      <text x="672" y="202">value  VARCHAR «UQ»</text>
+      <text x="672" y="222">length  INT</text>
+      <text x="672" y="242">difficulty  VARCHAR</text>
+    </g>
+  </g>
+
+  <!-- db_scores -->
+  <rect x="660" y="300" width="240" height="40" rx="9" fill="#f59e0b"/>
+  <text x="780" y="325" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">db_scores</text>
+  <g>
+    <rect x="660" y="350" width="240" height="170" rx="8" fill="#ffffff" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="660" y="350" width="240" height="26" rx="8" fill="#fef3c7"/>
+    <text x="780" y="368" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">game_results</text>
+    <g font-size="12" fill="#1b1f33">
+      <text x="672" y="392" font-weight="700">PK ·id  BIGSERIAL</text>
+      <text x="672" y="412">game_id  BIGINT</text>
+      <text x="672" y="432">player_id  BIGINT</text>
+      <text x="672" y="452">player_username  VARCHAR</text>
+      <text x="672" y="472">status  VARCHAR</text>
+      <text x="672" y="492">attempts_used · word_length</text>
+      <text x="672" y="510" fill="#5d6480">played_at  TIMESTAMP</text>
+    </g>
+  </g>
+
+  <!-- logical cross-db links -->
+  <g stroke="#a5abd6" stroke-width="1.6" stroke-dasharray="6 4" fill="none">
+    <path d="M240 200 C265 200, 270 215, 290 218"/>            <!-- players -> games (player_id) -->
+    <path d="M490 230 C610 200, 640 190, 660 190"/>            <!-- games -> words (word_id) -->
+    <path d="M490 330 C560 420, 620 430, 660 430"/>            <!-- games -> game_results (game_id) -->
+  </g>
+  <g font-size="10.5" fill="#6f76a0" font-style="italic">
+    <text x="246" y="194">player_id</text>
+    <text x="560" y="196">word_id</text>
+    <text x="540" y="412">game_id</text>
+  </g>
+
+  <text x="470" y="556" text-anchor="middle" font-size="11.5" fill="#8b5cf6">— — — référence logique inter-base (résolue applicativement par appel REST, pas de contrainte FK physique)</text>
+  <text x="470" y="578" text-anchor="middle" font-size="11.5" fill="#5d6480">Seule relation games 1—∞ attempts est une vraie clé étrangère (même base db_games).</text>
+</svg>

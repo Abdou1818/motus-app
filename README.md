@@ -34,6 +34,39 @@ Browser
         └─► admin-service  :8085  ──► player/game/score services
 ```
 
+> La passerelle écoute sur le port **8080** dans le réseau Docker, mais elle est exposée sur le port **8090** côté hôte (`8090:8080`). Toutes les URL `http://localhost:...` ci-dessous utilisent donc le port **8090**.
+
+---
+
+## Documentation & diagrammes
+
+La documentation complète du projet se trouve dans le dossier [`docs/`](docs/) :
+
+- 📄 **[Rapport de projet (.docx)](docs/Rapport-Motus-Microservices.docx)** — dossier complet (contexte, architecture, modèle de données, algorithme, sécurité, tests, déploiement).
+- 🖼️ **Diagrammes UML** (sources SVG + PNG) dans [`docs/diagrams/`](docs/diagrams/).
+
+### Architecture microservices
+
+<img src="docs/diagrams/02-architecture.svg" alt="Architecture microservices" width="640">
+
+### Cas d'utilisation
+
+<img src="docs/diagrams/01-use-case.svg" alt="Diagramme de cas d'utilisation" width="560">
+
+### Modèle de données (une base par service)
+
+<img src="docs/diagrams/05-mcd.svg" alt="Modèle de données" width="640">
+
+### Diagramme de classes
+
+<img src="docs/diagrams/03-class.svg" alt="Diagramme de classes" width="660">
+
+### Séquence — déroulement d'une partie
+
+<img src="docs/diagrams/04-sequence.svg" alt="Diagramme de séquence" width="660">
+
+> Pour régénérer les PNG à partir des SVG : `node .tooling/render.js` (nécessite `@resvg/resvg-js`).
+
 ---
 
 ## Stack technique
@@ -70,7 +103,7 @@ Les services démarrent dans l'ordre (postgres → word/player/score → game �
 | Service         | URL                              |
 |----------------|-----------------------------------|
 | Frontend        | http://localhost:3000             |
-| API Gateway     | http://localhost:8080             |
+| API Gateway     | http://localhost:8090             |
 | Player Service  | http://localhost:8081             |
 | Game Service    | http://localhost:8082             |
 | Word Service    | http://localhost:8083             |
@@ -119,7 +152,7 @@ Le **game-service** contient deux classes de test :
 
 **Exemple — Inscription :**
 ```bash
-curl -X POST http://localhost:8080/api/players/register \
+curl -X POST http://localhost:8090/api/players/register \
   -H "Content-Type: application/json" \
   -d '{"username": "Alice", "email": "alice@example.com"}'
 ```
@@ -139,14 +172,14 @@ curl -X POST http://localhost:8080/api/players/register \
 
 **Exemple — Démarrer une partie :**
 ```bash
-curl -X POST http://localhost:8080/api/games \
+curl -X POST http://localhost:8090/api/games \
   -H "Content-Type: application/json" \
   -d '{"playerId": 1, "wordLength": 5}'
 ```
 
 **Exemple — Soumettre un mot :**
 ```bash
-curl -X POST http://localhost:8080/api/games/1/attempts \
+curl -X POST http://localhost:8090/api/games/1/attempts \
   -H "Content-Type: application/json" \
   -d '{"word": "MOTUS"}'
 ```
@@ -207,7 +240,7 @@ Toutes les routes nécessitent le header `X-Admin-Key: admin-secret`.
 | GET     | `/stats`      | Statistiques globales          |
 
 ```bash
-curl http://localhost:8080/api/admin/stats \
+curl http://localhost:8090/api/admin/stats \
   -H "X-Admin-Key: admin-secret"
 ```
 
@@ -261,15 +294,18 @@ docker build -t motus/api-gateway:latest    api-gateway/
 
 L'interface est une SPA (Single Page Application) en HTML/CSS/JS pur, sans dépendance externe.
 
+<img src="docs/diagrams/06-ui-mockup.svg" alt="Écran de jeu Motus" width="620">
+
 **Fonctionnalités :**
 - Inscription / connexion par pseudo
 - Sélection de la longueur du mot (5, 6 ou 7 lettres)
 - Grille de jeu (6 lignes × N colonnes) avec couleurs en temps réel
 - Clavier virtuel avec état des lettres déjà jouées
-- Effets d'animation (flip, bounce, confettis)
+- Effets d'animation (retournement 3D, rebond, confettis)
 - Classement des meilleurs joueurs
 - Panneau admin (avec clé secrète)
-- Thème tricolore bleu/blanc/rouge
+
+**Thème graphique :** design clair, moderne et dynamique — fond en dégradés animés, couleur signature indigo–violet–rose, cartes arrondies et micro-interactions. Police *Space Grotesk* (titres) et *Inter* (corps).
 
 ---
 

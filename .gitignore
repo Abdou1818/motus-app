@@ -21,3 +21,10 @@ Thumbs.db
 
 # Docker volumes (local only)
 postgres-data/
+
+# Tooling (génération doc) — on garde les scripts, pas les dépendances
+.tooling/node_modules/
+.tooling/package-lock.json
+
+# Conversion temporaire du rapport
+docs/*.pdf

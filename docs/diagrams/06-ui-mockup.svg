@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/><stop offset="0.5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="emer" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#059669"/></linearGradient>
+    <linearGradient id="amb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+  </defs>
+  <rect width="760" height="600" fill="#eef1fb"/>
+
+  <!-- header -->
+  <text x="40" y="50" font-size="26" font-weight="700" fill="url(#grad)">M</text>
+  <text x="62" y="50" font-size="26" font-weight="700" fill="#ec4899">O</text>
+  <text x="84" y="50" font-size="26" font-weight="700" fill="url(#grad)">TUS</text>
+  <text x="40" y="66" font-size="9" letter-spacing="2" fill="#9aa1bd">LE JEU DE MOTS</text>
+  <!-- badge -->
+  <rect x="600" y="28" width="120" height="36" rx="18" fill="#fff" stroke="#e6e9f5"/>
+  <circle cx="622" cy="46" r="14" fill="url(#grad)"/>
+  <text x="622" y="50" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">A</text>
+  <text x="644" y="50" font-size="12" font-weight="600" fill="#1b1f33">alice</text>
+
+  <!-- nav -->
+  <rect x="40" y="84" width="80" height="30" rx="15" fill="url(#grad)"/>
+  <text x="80" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">JOUER</text>
+  <rect x="128" y="84" width="110" height="30" rx="15" fill="#fff" stroke="#e6e9f5"/>
+  <text x="183" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#5d6480">CLASSEMENT</text>
+  <rect x="246" y="84" width="74" height="30" rx="15" fill="#fff" stroke="#e6e9f5"/>
+  <text x="283" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#5d6480">ADMIN</text>
+
+  <!-- card -->
+  <rect x="40" y="134" width="680" height="446" rx="20" fill="#fff" stroke="#e6e9f5"/>
+  <circle cx="62" cy="166" r="4" fill="url(#grad)"/>
+  <text x="74" y="170" font-size="11" font-weight="700" letter-spacing="1.5" fill="#6366f1">PARTIE EN COURS</text>
+  <line x1="40" y1="184" x2="720" y2="184" stroke="#e6e9f5"/>
+
+  <!-- stat pills -->
+  <g font-size="11" fill="#5d6480">
+    <rect x="56" y="200" width="78" height="26" rx="13" fill="#f4f6fd" stroke="#e6e9f5"/><text x="68" y="217"><tspan fill="#6366f1" font-weight="700">5</tspan> lettres</text>
+    <rect x="142" y="200" width="92" height="26" rx="13" fill="#f4f6fd" stroke="#e6e9f5"/><text x="154" y="217">Essais <tspan fill="#6366f1" font-weight="700">2/6</tspan></text>
+    <rect x="242" y="200" width="92" height="26" rx="13" fill="#f4f6fd" stroke="#e6e9f5"/><text x="254" y="217"><tspan fill="#6366f1" font-weight="700">4</tspan> restants</text>
+  </g>
+
+  <!-- grid -->
+  <g>
+    <!-- row1: P O R T E -->
+    <g>
+      <rect x="280" y="248" width="40" height="40" rx="11" fill="#eef1fb" stroke="#6366f1" stroke-width="2"/><text x="300" y="275" text-anchor="middle" font-size="20" font-weight="700" fill="#6366f1">P</text>
+      <rect x="326" y="248" width="40" height="40" rx="11" fill="url(#emer)" stroke="#10b981" stroke-width="2"/><text x="346" y="275" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">O</text>
+      <rect x="372" y="248" width="40" height="40" rx="11" fill="url(#amb)" stroke="#f59e0b" stroke-width="2"/><text x="392" y="275" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">R</text>
+      <rect x="418" y="248" width="40" height="40" rx="11" fill="#dfe3f0" stroke="#cdd3e6" stroke-width="2"/><text x="438" y="275" text-anchor="middle" font-size="20" font-weight="700" fill="#8b91ab">T</text>
+      <rect x="464" y="248" width="40" height="40" rx="11" fill="url(#emer)" stroke="#10b981" stroke-width="2"/><text x="484" y="275" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">E</text>
+    </g>
+    <!-- row2: P O I D E -->
+    <g>
+      <rect x="280" y="294" width="40" height="40" rx="11" fill="#eef1fb" stroke="#6366f1" stroke-width="2"/><text x="300" y="321" text-anchor="middle" font-size="20" font-weight="700" fill="#6366f1">P</text>
+      <rect x="326" y="294" width="40" height="40" rx="11" fill="url(#emer)" stroke="#10b981" stroke-width="2"/><text x="346" y="321" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">O</text>
+      <rect x="372" y="294" width="40" height="40" rx="11" fill="#dfe3f0" stroke="#cdd3e6" stroke-width="2"/><text x="392" y="321" text-anchor="middle" font-size="20" font-weight="700" fill="#8b91ab">I</text>
+      <rect x="418" y="294" width="40" height="40" rx="11" fill="#dfe3f0" stroke="#cdd3e6" stroke-width="2"/><text x="438" y="321" text-anchor="middle" font-size="20" font-weight="700" fill="#8b91ab">D</text>
+      <rect x="464" y="294" width="40" height="40" rx="11" fill="url(#emer)" stroke="#10b981" stroke-width="2"/><text x="484" y="321" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">E</text>
+    </g>
+    <!-- row3 current: P _ _ _ _ -->
+    <g>
+      <rect x="280" y="340" width="40" height="40" rx="11" fill="#eef1fb" stroke="#6366f1" stroke-width="2"/><text x="300" y="367" text-anchor="middle" font-size="20" font-weight="700" fill="#6366f1">P</text>
+      <rect x="326" y="340" width="40" height="40" rx="11" fill="#fff" stroke="#6366f1" stroke-width="2"/>
+      <rect x="372" y="340" width="40" height="40" rx="11" fill="#fff" stroke="#6366f1" stroke-width="2"/>
+      <rect x="418" y="340" width="40" height="40" rx="11" fill="#fff" stroke="#6366f1" stroke-width="2"/>
+      <rect x="464" y="340" width="40" height="40" rx="11" fill="#fff" stroke="#6366f1" stroke-width="2"/>
+    </g>
+    <!-- rows 4-5 empty -->
+    <g opacity="0.5">
+      <rect x="280" y="386" width="40" height="40" rx="11" fill="#eef1fb" stroke="#6366f1" stroke-width="2"/><text x="300" y="413" text-anchor="middle" font-size="20" font-weight="700" fill="#6366f1">P</text>
+      <rect x="326" y="386" width="40" height="40" rx="11" fill="#fff" stroke="#e6e9f5" stroke-width="2"/>
+      <rect x="372" y="386" width="40" height="40" rx="11" fill="#fff" stroke="#e6e9f5" stroke-width="2"/>
+      <rect x="418" y="386" width="40" height="40" rx="11" fill="#fff" stroke="#e6e9f5" stroke-width="2"/>
+      <rect x="464" y="386" width="40" height="40" rx="11" fill="#fff" stroke="#e6e9f5" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- legend -->
+  <g font-size="11" fill="#5d6480">
+    <rect x="540" y="250" width="14" height="14" rx="4" fill="#10b981"/><text x="560" y="261">Bonne place</text>
+    <rect x="540" y="276" width="14" height="14" rx="4" fill="#f59e0b"/><text x="560" y="287">Mauvaise place</text>
+    <rect x="540" y="302" width="14" height="14" rx="4" fill="#dfe3f0" stroke="#cdd3e6"/><text x="560" y="313">Absent</text>
+  </g>
+
+  <!-- input + button -->
+  <rect x="56" y="450" width="540" height="44" rx="12" fill="#f4f6fd" stroke="#e6e9f5" stroke-width="2"/>
+  <text x="326" y="478" text-anchor="middle" font-size="18" font-weight="700" letter-spacing="8" fill="#1b1f33">P_ _ _ _</text>
+  <rect x="608" y="450" width="112" height="44" rx="22" fill="url(#emer)"/>
+  <text x="664" y="477" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">VALIDER</text>
+
+  <!-- keyboard hint row -->
+  <g font-size="11" font-weight="600" fill="#5d6480">
+    <rect x="56" y="510" width="36" height="40" rx="9" fill="#f4f6fd" stroke="#e6e9f5"/><text x="74" y="535" text-anchor="middle">A</text>
+    <rect x="98" y="510" width="36" height="40" rx="9" fill="#f4f6fd" stroke="#e6e9f5"/><text x="116" y="535" text-anchor="middle">Z</text>
+    <rect x="140" y="510" width="36" height="40" rx="9" fill="#dfe3f0" stroke="#cdd3e6"/><text x="158" y="535" text-anchor="middle" fill="#8b91ab">E</text>
+    <rect x="182" y="510" width="36" height="40" rx="9" fill="url(#amb)"/><text x="200" y="535" text-anchor="middle" fill="#fff">R</text>
+    <rect x="224" y="510" width="36" height="40" rx="9" fill="#f4f6fd" stroke="#e6e9f5"/><text x="242" y="535" text-anchor="middle">T</text>
+    <rect x="266" y="510" width="36" height="40" rx="9" fill="#f4f6fd" stroke="#e6e9f5"/><text x="284" y="535" text-anchor="middle">Y</text>
+    <rect x="308" y="510" width="36" height="40" rx="9" fill="#f4f6fd" stroke="#e6e9f5"/><text x="326" y="535" text-anchor="middle">U</text>
+    <rect x="350" y="510" width="36" height="40" rx="9" fill="#f4f6fd" stroke="#e6e9f5"/><text x="368" y="535" text-anchor="middle">I</text>
+    <rect x="392" y="510" width="36" height="40" rx="9" fill="#dfe3f0" stroke="#cdd3e6"/><text x="410" y="535" text-anchor="middle" fill="#8b91ab">O</text>
+    <rect x="434" y="510" width="36" height="40" rx="9" fill="url(#emer)"/><text x="452" y="535" text-anchor="middle" fill="#fff">P</text>
+  </g>
+</svg>

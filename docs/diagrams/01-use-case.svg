@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="640" fill="#ffffff"/>
+  <text x="450" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#1b1f33">Diagramme de cas d'utilisation — Motus</text>
+
+  <!-- System boundary -->
+  <rect x="250" y="70" width="400" height="540" rx="14" fill="#fbfcff" stroke="#c7cdec" stroke-width="2"/>
+  <text x="450" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#8b5cf6">Système Motus</text>
+
+  <!-- Actor: Joueur -->
+  <g stroke="#1b1f33" stroke-width="2" fill="none">
+    <circle cx="80" cy="180" r="18" fill="#eef1fb"/>
+    <line x1="80" y1="198" x2="80" y2="245"/>
+    <line x1="52" y1="215" x2="108" y2="215"/>
+    <line x1="80" y1="245" x2="55" y2="280"/>
+    <line x1="80" y1="245" x2="105" y2="280"/>
+  </g>
+  <text x="80" y="305" text-anchor="middle" font-size="15" font-weight="700" fill="#1b1f33">Joueur</text>
+
+  <!-- Actor: Admin -->
+  <g stroke="#1b1f33" stroke-width="2" fill="none">
+    <circle cx="820" cy="430" r="18" fill="#fef3c7"/>
+    <line x1="820" y1="448" x2="820" y2="495"/>
+    <line x1="792" y1="465" x2="848" y2="465"/>
+    <line x1="820" y1="495" x2="795" y2="530"/>
+    <line x1="820" y1="495" x2="845" y2="530"/>
+  </g>
+  <text x="820" y="555" text-anchor="middle" font-size="15" font-weight="700" fill="#1b1f33">Administrateur</text>
+
+  <!-- Use cases JOUEUR (ellipses) -->
+  <g font-size="13" fill="#1b1f33" text-anchor="middle">
+    <ellipse cx="385" cy="135" rx="105" ry="26" fill="#eef1fb" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="385" y="140">S'inscrire</text>
+    <ellipse cx="385" cy="195" rx="105" ry="26" fill="#eef1fb" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="385" y="200">Se connecter</text>
+    <ellipse cx="385" cy="255" rx="105" ry="26" fill="#eef1fb" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="385" y="260">Démarrer une partie</text>
+    <ellipse cx="385" cy="315" rx="105" ry="26" fill="#eef1fb" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="385" y="320">Proposer un mot</text>
+    <ellipse cx="385" cy="375" rx="105" ry="26" fill="#eef1fb" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="385" y="380">Consulter son historique</text>
+    <ellipse cx="385" cy="435" rx="105" ry="26" fill="#eef1fb" stroke="#6366f1" stroke-width="1.8"/>
+    <text x="385" y="440">Consulter le classement</text>
+  </g>
+
+  <!-- Use cases ADMIN -->
+  <g font-size="13" fill="#1b1f33" text-anchor="middle">
+    <ellipse cx="540" cy="500" rx="100" ry="26" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="540" y="505">S'authentifier (clé)</text>
+    <ellipse cx="540" cy="558" rx="100" ry="26" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="540" y="563">Rechercher les parties</text>
+    <ellipse cx="385" cy="500" rx="95" ry="26" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="385" y="497" font-size="12">Lister les joueurs</text>
+    <ellipse cx="385" cy="558" rx="95" ry="26" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.8"/>
+    <text x="385" y="555" font-size="12">Statistiques</text>
+    <text x="385" y="571" font-size="12">globales</text>
+  </g>
+
+  <!-- Joueur associations -->
+  <g stroke="#6366f1" stroke-width="1.6">
+    <line x1="100" y1="270" x2="280" y2="140"/>
+    <line x1="105" y1="275" x2="280" y2="198"/>
+    <line x1="110" y1="280" x2="280" y2="255"/>
+    <line x1="110" y1="288" x2="280" y2="315"/>
+    <line x1="105" y1="295" x2="280" y2="375"/>
+    <line x1="100" y1="300" x2="280" y2="435"/>
+  </g>
+
+  <!-- Admin associations -->
+  <g stroke="#f59e0b" stroke-width="1.6">
+    <line x1="800" y1="445" x2="640" y2="500"/>
+    <line x1="800" y1="455" x2="640" y2="558"/>
+    <line x1="798" y1="448" x2="480" y2="500"/>
+    <line x1="798" y1="458" x2="480" y2="558"/>
+  </g>
+
+  <!-- include: démarrer -> proposer needs connecté (informative) -->
+  <g font-size="11" fill="#8b5cf6" font-style="italic">
+    <line x1="385" y1="221" x2="385" y2="229" stroke="#8b5cf6" stroke-width="1.2" stroke-dasharray="4 3"/>
+  </g>
+
+  <!-- Mapping to 4 requirements -->
+  <text x="450" y="628" text-anchor="middle" font-size="11.5" fill="#5d6480">Couvre les 4 fonctions imposées : gérer les joueurs · gérer les parties · suivre les scores · administrer le jeu</text>
+</svg>
